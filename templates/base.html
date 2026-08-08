@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PGManager{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "base.css" %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    {% block css_file %}
+        <link rel="stylesheet" href="{% static "base.css" %}">
+    {% endblock css_file %}
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="title">
+                <h2>PG<span class="yellow">Manager</span></h2>
+            </div>
+            <nav>
+                <li><a href="{% url "dashboard" %}">Dashboard</a></li>
+                <li><a href="{% url "registration" %}">Tenant Registration</a></li>
+                <li><a href="{% url "tenant" %}">Tenant</a></li>
+                <li><a href="{% url "payment" %}">Pending Payments</a></li>
+                <li><a href="{% url "complaint-registration" %}">Complaint Registration</a></li>
+                <li><a href="{% url "tenant-complaints" %}">Tenant Complaints</a></li>
+            </nav>
+        </aside>
+        <div class="main-content">
+            {% block content %}
+            {% endblock content %}    
+        </div>
+    </div>
+    
+</body>
+</html>

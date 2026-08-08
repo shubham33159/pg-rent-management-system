@@ -1,8 +1,12 @@
-{% extends "dashboard/base/base.html" %}
+{% extends "base.html" %}
+{% load static %}
 {% block title %}Dashboard{% endblock title %}
 
-{% block body %}
-    <section class="dashboard-content">
+{% block css_file %}
+    <link rel="stylesheet" href="{% static "dashboard/dashboard.css" %}">
+{% endblock css_file %}
+
+
+{% block content %}
         <h1>Paid/Unpaid Rent Piechart</h1>
-    </section>
-{% endblock body %}
+{% endblock content %}

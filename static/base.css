@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.layout{
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar{
+    width: 250px;
+    background: #151a26;
+}
+
+.sidebar .title{
+    color: #dbe5ed;
+    border-bottom: 1px solid rgba(90, 42, 42, 0.82);
+}
+
+.yellow{
+    color: #f19c0d;
+}
+
+.white{
+    color: #dbe5ed;
+}

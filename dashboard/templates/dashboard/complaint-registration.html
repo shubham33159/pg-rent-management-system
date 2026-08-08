@@ -1,10 +1,15 @@
-{% extends "dashboard/base/base.html" %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 Complaint Registration
 {% endblock title %}
 
+{% block css_file %}
+    <link rel="stylesheet" href="{% static "" %}">
+{% endblock css_file %}
 
-{% block body %}
+
+{% block content %}
 <h1>Complaint Registration</h1>
-{% endblock body %}
+{% endblock content %}

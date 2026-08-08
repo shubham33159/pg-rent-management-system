@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header-content{
+    border: 2px solid red;
+    width: 20rem;
+    max-width: 20rem;
+    display:inline-block;
+    /* align-content:start; */
+}
