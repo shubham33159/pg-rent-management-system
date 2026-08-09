@@ -1,12 +1,66 @@
 from django.shortcuts import render
-
+from dashboard.forms import TenantForm, AddressForm, RoomForm
+from dashboard.models import Tenant, Address, Room
 # Create your views here.
 
 def dashboard(request):
     return render(request, "dashboard/dashboard.html")
 
 def registration(request):
-    return render(request, "dashboard/registration.html")
+    if request.method == "POST":
+        tenant_form = TenantForm(request.POST)
+        address_form = AddressForm(request.POST)
+        room_form = RoomForm(request.POST)
+        if tenant_form.is_valid() and address_form.is_valid() and room_form.is_valid():
+            tenant_data = tenant_form.cleaned_data
+            address_data = address_form.cleaned_data
+            room_data = room_form.cleaned_data
+
+            address = Address(
+                street = address_data["street"],
+                city = address_data["city"],
+                state = address_data["state"],
+                pincode = address_data["pincode"],
+                country = address_data["country"]
+            )
+            address.save()
+
+            room = Room(
+                number = room_data["number"],
+                sharing_type = room_data["sharing_type"],
+                rent = room_data["rent"],
+                floor = room_data["floor"],
+                room_state = room_data["room_state"]
+            )
+            room.save()
+
+            tenant = Tenant(
+                firstname = tenant_data["firstname"], 
+                lastname = tenant_data["lastname"], 
+                email = tenant_data["email"], 
+                uid = tenant_data["uid"],
+                gender = tenant_data["gender"],
+                status = tenant_data["status"],
+                emg_contact_name = tenant_data["emg_contact_name"],
+                emg_contact = tenant_data["emg_contact"],
+                address = address,
+                room = room,
+                move_in_date = tenant_data["move_in_date"],
+                security_deposit = tenant_data["security_deposit"],
+                adv_rent = tenant_data["adv_rent"],
+                notes = tenant_data["notes"]
+            )
+            tenant.save()
+    else:
+        tenant_form = TenantForm()
+        address_form = AddressForm()
+        room_form = RoomForm()
+
+    return render(request, "dashboard/registration.html", {
+        "tenant_form": tenant_form,
+        "address_form": address_form,
+        "room_form": room_form
+    })
 
 def tenant(request):
     return render(request, "dashboard/tenant.html")

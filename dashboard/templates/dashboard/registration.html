@@ -19,5 +19,14 @@ Tenant Registration
             <span class="status-dot"></span>
         </div>
     </header>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ tenant_form }}
+        {{ address_form }}
+        {{ room_form }}
+        <button type="submit">Register Tenant</button>
+    </form>
+
 </main>
 {% endblock content %}

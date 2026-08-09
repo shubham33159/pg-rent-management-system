@@ -6,7 +6,7 @@ class Room(models.Model):
     number = models.CharField(max_length=10, null=False, blank=False)
     sharing_type = models.IntegerField(validators=[MinValueValidator(2), MaxValueValidator(3)], default=2)
     rent = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(100000)])
-    floor = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(4)])
+    floor = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(7)])
     room_state = models.CharField(max_length=100)
 
     def __str__(self):
@@ -39,4 +39,5 @@ class Tenant(models.Model):
     adv_rent = models.DecimalField(max_digits=10, decimal_places=2)
     notes = models.TextField(max_length=1000, blank=True)
     slug = models.SlugField(unique=True)
+
 
