@@ -16,6 +16,3 @@ def payment(request):
 
 def complaint_registration(request):
     return render(request, "dashboard/complaint-registration.html")
-
-def tenant_complaint(request):
-    return render(request, "dashboard/tenant-complaint.html")

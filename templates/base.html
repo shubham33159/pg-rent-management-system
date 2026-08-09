@@ -19,15 +19,14 @@
     <div class="layout">
         <aside class="sidebar">
             <div class="title">
-                <h2>PG<span class="yellow">Manager</span></h2>
+                <h2>PG<span class="text-yellow">Manager</span></h2>
             </div>
-            <nav>
+            <nav class="navbar">
                 <li><a href="{% url "dashboard" %}">Dashboard</a></li>
-                <li><a href="{% url "registration" %}">Tenant Registration</a></li>
-                <li><a href="{% url "tenant" %}">Tenant</a></li>
-                <li><a href="{% url "payment" %}">Pending Payments</a></li>
-                <li><a href="{% url "complaint-registration" %}">Complaint Registration</a></li>
-                <li><a href="{% url "tenant-complaints" %}">Tenant Complaints</a></li>
+                <li><a href="{% url "registration" %}">Register Tenant</a></li>
+                <li><a href="{% url "tenant" %}">Tenants</a></li>
+                <li><a href="{% url "payment" %}">Payments</a></li>
+                <li><a href="{% url "complaint-registration" %}">Maintenance</a></li>
             </nav>
         </aside>
         <div class="main-content">
