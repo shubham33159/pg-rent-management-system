@@ -62,8 +62,15 @@ def registration(request):
         "room_form": room_form
     })
 
+
+
+
+
 def tenant(request):
     return render(request, "dashboard/tenant.html")
+
+def room(request):
+    return render(request, "dashboard/room.html")
 
 def payment(request):
     return render(request, "dashboard/payments.html")

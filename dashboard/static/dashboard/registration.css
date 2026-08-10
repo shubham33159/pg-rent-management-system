@@ -9,7 +9,45 @@
 
 
 .page-header{
+    font-family: "Roboto Slab", serif;
     color: #dbe5ed;
     display: flex;
-    align-content: space-between;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    border-bottom: 0.5px solid #4e53544f;
+}
+
+.header-title h2{
+    padding: 1.6rem;
+    font-weight: 700;
+    font-size: 2.0rem;
+    margin-left: 2rem;
+}
+
+.header-date{
+    padding: 1.6rem;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.header-date span{
+    display: inline-block;
+    color: #657190;
+    font-size: 1.2rem;
+    word-spacing: 0.5rem;
+
+}
+
+.header-date .status-dot{
+    width: 1rem;
+    height: 1rem;
+    background: green;
+    border-radius: 100%;
+}
+
+form{
+    color: #657190;
+    background: #151a26;
+    padding: 2rem;
+    margin: 3rem;
 }

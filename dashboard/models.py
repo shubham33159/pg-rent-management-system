@@ -34,7 +34,7 @@ class Tenant(models.Model):
     emg_contact = models.CharField(max_length=10, null=True, blank=True)
     address = models.ForeignKey(Address, on_delete=models.PROTECT, null=False, blank=False)
     room = models.ForeignKey(Room,on_delete=models.PROTECT, null=False, blank=False)
-    move_in_date = models.DateField(auto_now=True,null=False, blank=False)
+    move_in_date = models.DateField(null=False, blank=False)
     security_deposit = models.DecimalField(max_digits=10, decimal_places=2)
     adv_rent = models.DecimalField(max_digits=10, decimal_places=2)
     notes = models.TextField(max_length=1000, blank=True)

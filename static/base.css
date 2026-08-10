@@ -1,8 +1,12 @@
-body{
+*{
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Roboto", sans-serif;
-    box-sizing: border-box;
+}
+
+html{
+    font-family: "Outfit", sans-serif;
+    font-size: 62.5%;
 }
 
 /* ###### Element styling ###### */
@@ -34,30 +38,49 @@ li{
     background: #151a26;
 }
 
-.sidebar .title{
+
+.sidebar .title h3{
     color: #dbe5ed;
-    border-bottom: 1px solid rgba(90, 42, 42, 0.82);
+    border-bottom: 1px solid #4e53544f;
+    padding: 1.6rem;
+    font-family: "Roboto Slab", serif;
+    font-size: 2rem;
 }
 
 .sidebar .navbar{
-    padding: 1rem;
-}
-
-.sidebar .navbar li{
-    margin: 1rem 1rem;
-    padding: 0.5rem;
+    font-family: "Outfit", sans-serif;
+    font-size: 1.3rem;
+    margin: 1rem;
 }
 
 .sidebar .navbar li a{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
     color: #657190;
     text-decoration: none;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 2rem auto;
+}
+
+.sidebar .navbar li i {
+    width: 2rem;
+    text-align: center;
 }
 
 .sidebar .navbar a:hover{
-    color: #fff;
+    background: #292d3676;
+}
+
+.sidebar .navbar a.active{
+    color: #f19c0d;
+    background: #f59e0b1f;
+    font-weight: 700;
 }
 
 .layout .main-content{
-    background: #151a26;
+    background: #0d1117;
     width: 100%;
 }
+

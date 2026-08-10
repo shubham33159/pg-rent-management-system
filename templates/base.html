@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="{% static "base.css" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/0a12b55523.js" crossorigin="anonymous"></script>
     {% block css_file %}
         <link rel="stylesheet" href="{% static "base.css" %}">
     {% endblock css_file %}
@@ -19,14 +23,15 @@
     <div class="layout">
         <aside class="sidebar">
             <div class="title">
-                <h2>PG<span class="text-yellow">Manager</span></h2>
+                <h3>PG<span class="text-yellow">Manager<i class="fa-solid fa-user-tie"></i></span></h3>
             </div>
             <nav class="navbar">
-                <li><a href="{% url "dashboard" %}">Dashboard</a></li>
-                <li><a href="{% url "registration" %}">Register Tenant</a></li>
-                <li><a href="{% url "tenant" %}">Tenants</a></li>
-                <li><a href="{% url "payment" %}">Payments</a></li>
-                <li><a href="{% url "complaint-registration" %}">Maintenance</a></li>
+                <li><a href="{% url "dashboard" %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fa-solid fa-chart-bar"></i>Dashboard</a></li>
+                <li><a href="{% url "registration" %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}"><i class="fa-solid fa-person-circle-plus"></i>Register Tenant</a></li>
+                <li><a href="{% url "tenant" %}" class="{% if request.resolver_match.url_name == 'tenant' %}active{% endif %}"><i class="fa-solid fa-users"></i>Tenants</a></li>
+                <li><a href="{% url "room" %}" class="{% if request.resolver_match.url_name == 'room' %}active{% endif %}"><i class="fa-solid fa-hotel"></i>Rooms</a></li>
+                <li><a href="{% url "payment" %}" class="{% if request.resolver_match.url_name == 'payment' %}active{% endif %}"><i class="fa-solid fa-indian-rupee-sign"></i>Payments</a></li>
+                <li><a href="{% url "complaint-registration" %}" class="{% if request.resolver_match.url_name == 'complaint-registration' %}active{% endif %}"><i class="fa-solid fa-toolbox"></i>Maintenance</a></li>
             </nav>
         </aside>
         <div class="main-content">
