@@ -1,10 +1,87 @@
 {% extends "base.html" %}
+{% load static %}
+{% load humanize %}
 
 {% block title %}
 Tenant
 {% endblock title %}
 
+{% block css_file %}
+    <link rel="stylesheet" href="{% static 'dashboard/tenant.css' %}">
+{% endblock css_file %}
 
 {% block content %}
-<h1>Tenant</h1>
+    
+<main>
+    <header class="page-header">
+        <div class="header-title header-box">
+            <h2>Tenants</h2>
+        </div>
+        <div class="header-date header-box">
+            <span>{% now "M Y" %}</span>
+            <span class="status-dot"></span>
+        </div>
+    </header>
+
+    <div class="tenant-table">
+        <div class="tenant-row tenant-header">
+            <div>TENANT</div>
+            <div>ROOM</div>
+            <div>SINCE</div>
+            <div>PHONE</div>
+            <div>DEPOSIT</div>
+            <div>STATUS</div>
+        </div>
+        
+        {% for t_info in tenant_info %}
+            <div class="tenant-row">
+
+                <div class="tenant-details">
+                    <span class="tenant-name">
+                        {{ t_info.firstname }}
+                        {{ t_info.lastname }}
+                    </span>
+                    
+                    <span class="tenant-email">
+                        {{ t_info.email }}
+                    </span>
+                </div>
+
+                <div class="room-number">
+                    {{ t_info.room.number }}
+                </div>
+                
+                <div class="move-in-date">
+                    {{ t_info.move_in_date }}
+                </div>
+
+                <div class="phone-number">
+                    {{ t_info.phone_number }}
+                </div>
+
+                <div class="deposit">
+                    ₹{{ t_info.security_deposit | intcomma }}
+                </div>
+
+                <div> 
+                    {% if t_info.status == "Active" %}
+                        <span class="status active">{{ t_info.status | upper}} </span>
+
+                    {% elif t_info.status == "Overdue" %}
+                        <span class="status overdue">{{ t_info.status | upper}} </span>
+
+                    {% elif t_info.status == "Notice" %}
+                        <span class="status notice">{{ t_info.status | upper}} </span>
+                    
+                    {% endif %}
+                </div>
+            </div>
+        
+        {% endfor %}
+    </div>
+</main>
+
+
+
+
 {% endblock content %}

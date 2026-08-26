@@ -12,6 +12,7 @@ Tenant Registration
 
 {% block content %}
 <main>
+    
     <header class="page-header">
         <div class="header-title header-box">
             <h2>Register Tenant</h2>
@@ -22,12 +23,127 @@ Tenant Registration
         </div>
     </header>
 
-    <form action="" method="POST">
+    <form action="" method="POST" novalidate>
         {% csrf_token %}
-        {{ tenant_form }}
-        {{ address_form }}
-        {{ room_form }}
+
+        <section class="form-control bg-lightblack text-gray">
+            <h1><span class="section-number">01 </span>Personal Details</h1>
+            <hr>
+            <div class="flex-wrapper">
+                {% for tenant_field in personal_details_form %}
+                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
+                        <div class="label-field">
+                        <label for="{{ tenant_field.id_for_label }}">
+                            {{ tenant_field.label | upper }}
+                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        </div>
+                        <div class="input-field">
+                            {{ tenant_field }}
+                        </div>
+                        <div class="error-field">
+                            {{ tenant_field.errors }}
+                        </div>
+                    </div>
+                {% endfor %}
+            <div>
+        </section>
+
+        <section class="form-control bg-lightblack text-gray">
+            <h1><span class="section-number">02 </span>Emergency Contact</h1>
+            <hr>
+            <div class="flex-wrapper">
+                {% for tenant_field in emergency_contact_form %}
+                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
+                        <div class="label-field">
+                        <label for="{{ tenant_field.id_for_label }}">
+                            {{ tenant_field.label | upper }}
+                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        </div>
+                        <div class="input-field">
+                            {{ tenant_field }}
+                        </div>
+                        <div class="error-field">
+                            {{ tenant_field.errors }}
+                        </div>
+                    </div>
+                {% endfor %}
+            <div>
+        </section>
+
+        <section class="form-control bg-lightblack text-gray">
+            <h1><span class="section-number">03 </span>Address</h1>
+            <hr>
+            <div class="flex-wrapper">
+                {% for tenant_field in address_form %}
+                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
+                        <div class="label-field">
+                        <label for="{{ tenant_field.id_for_label }}">
+                            {{ tenant_field.label | upper }}
+                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        </div>
+                        <div class="input-field">
+                            {{ tenant_field }}
+                        </div>
+                        <div class="error-field">
+                            {{ tenant_field.errors }}
+                        </div>
+                    </div>
+                {% endfor %}
+            <div>
+        </section>
+
+        <section class="form-control bg-lightblack text-gray">
+            <h1><span class="section-number">04 </span> Room & Financials</h1>
+            <hr>
+            <div class="flex-wrapper">
+                {% for tenant_field in room_finance_form %}
+                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
+                        <div class="label-field">
+                        <label for="{{ tenant_field.id_for_label }}">
+                            {{ tenant_field.label | upper }}
+                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        </div>
+                        <div class="input-field">
+                            {{ tenant_field }}
+                        </div>
+                        <div class="error-field">
+                            {{ tenant_field.errors }}
+                        </div>
+                    </div>
+                {% endfor %}
+            <div>
+        </section>
+
+
+        <section class="form-control bg-lightblack text-gray">
+            <h1><span class="section-number">05 </span> Additional Notes</h1>
+            <hr>
+            <div class="flex-wrapper">
+                {% for tenant_field in additional_notes_form %}
+                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
+                        <div class="label-field">
+                        <label for="{{ tenant_field.id_for_label }}">
+                            {{ tenant_field.label | upper }}
+                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        </div>
+                        <div class="input-field">
+                            {{ tenant_field }}
+                        </div>
+                        <div class="error-field">
+                            {{ tenant_field.errors }}
+                        </div>
+                    </div>
+                {% endfor %}
+            <div>
+        </section>
+
         <button type="submit">Register Tenant</button>
+        <button type="reset">Clear Form</button>
     </form>
 
 </main>

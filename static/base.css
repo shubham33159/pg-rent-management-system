@@ -24,7 +24,13 @@ li{
     color: #dbe5ed;
 }
 
+.bg-lightblack{
+    background: #151a26;
+}
 
+.text-gray{
+    color: #657190;
+}
 
 /* ##### sidebar styling ########### */
 
@@ -34,10 +40,14 @@ li{
 }
 
 .sidebar{
-    width: 250px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 25rem;
     background: #151a26;
+    z-index: 1000;
 }
-
 
 .sidebar .title h3{
     color: #dbe5ed;
@@ -57,11 +67,11 @@ li{
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    color: #657190;
     text-decoration: none;
     padding: 1rem;
     border-radius: 4px;
-    margin: 2rem auto;
+    margin: 0.5rem auto;
+    color: #657190;
 }
 
 .sidebar .navbar li i {
@@ -82,5 +92,11 @@ li{
 .layout .main-content{
     background: #0d1117;
     width: 100%;
+    margin-left: 25rem;
+    min-height: 100vh;
 }
 
+
+span.required{
+    color: #ffff009c;
+}

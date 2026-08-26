@@ -1,0 +1,129 @@
+.page-header{
+    font-family: "Roboto Slab", serif;
+    color: #dbe5ed;
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    border-bottom: 0.5px solid #4e53544f;
+}
+
+.header-title h2{
+    padding: 1.6rem;
+    font-weight: 700;
+    font-size: 2.0rem;
+    margin-left: 2rem;
+}
+
+.header-date{
+    padding: 1.6rem;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.header-date span{
+    display: inline-block;
+    color: #657190;
+    font-size: 1.2rem;
+    word-spacing: 0.5rem;
+
+}
+
+.header-date .status-dot{
+    width: 1rem;
+    height: 1rem;
+    background: green;
+    border-radius: 100%;
+    margin-left: 0.5rem;
+}
+
+
+
+.tenant-table{
+    color: #dbe5ed;
+    border: 1px solid #2a3040;
+    width: 95%;
+    background: #151a26;
+    border-radius: 1rem;
+    margin: 3rem;
+    padding: 1rem;
+    letter-spacing: 1px;
+}
+
+.tenant-row{
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 1.8fr 2fr 1.5fr 1.5fr;
+    border-bottom: 1px solid #2a3040;
+    /* padding: 1rem; */
+    align-items: center;
+    min-height: 4rem;
+    padding: 2.2rem 2.2rem;
+    margin: 0 -1.1rem;
+}
+
+.tenant-row:last-child {
+    border-bottom: none;
+}
+
+.tenant-header{
+    color: #7185ad;
+    min-height: 4.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.tenant-details{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tenant-name{
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.tenant-email{
+    font-size: 1.2rem;
+    color: #7185ad;
+}
+
+.room-number{
+    color:  #ff9f00;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.move-in-date{
+    color: #7185ad;
+    font-size: 1.3rem;
+}
+
+.phone-number{
+    font-size: 1.3rem;
+}
+
+.deposit{
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.status{
+    display: inline-block;
+    padding: 0.4rem 0.5rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.status.active{
+    color: #38e58c;
+    background: rgba(34, 197, 121, 0.119);
+}
+
+.status.overdue {
+    color: #ff4d6d;
+    background: rgba(255, 77, 109, 0.15);
+}
+

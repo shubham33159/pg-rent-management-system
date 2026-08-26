@@ -1,10 +1,47 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 Rooms
 {% endblock title %}
 
+{% block css_file %}
+    <link rel="stylesheet" href="{% static "dashboard/room.css" %}">
+
+{% endblock css_file %}
 
 {% block content %}
+
+<main>
+    <header class="page-header">
+        <div class="header-title header-box">
+            <h2>Rooms</h2>
+        </div>
+        <div class="header-date header-box">
+            <span>{% now "M Y" %}</span>
+            <span class="status-dot"></span>
+        </div>
+    </header>
+
+</main>
+
 <h1>Room</h1>
+
+{% for t_info in tenant %}
+    {{ t_info.firstname }}
+    {{ t_info.lastname }}
+{% endfor %}
+
+
+{% for r_info in room %}
+    {{ r_info.number }}
+    {{ r_info.sharing_type }}
+    {{ r_info.rent }}
+    {{ r_info.floor }}
+{% endfor %}
+
+<br>
+hI
+{{ room.0.tenant_set.all.0.lastname}}
+
 {% endblock content %}
