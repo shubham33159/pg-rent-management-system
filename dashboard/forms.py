@@ -34,7 +34,7 @@ from datetime import date
 
 
 class TenantForm(forms.ModelForm):
-    gender = forms.ChoiceField(label="Gender", choices=[("","Select Gender"), ("male","Male"), ("female","Female"), ("others","Others")])
+    # gender = forms.ChoiceField(label="Gender", choices=[("","Select Gender"), ("male","Male"), ("female","Female"), ("others","Others")])
     uid = forms.CharField(label="Adhar Number", max_length=12, validators=[RegexValidator(regex=r"^\d{12}$", message="Aadhaar number must contain exactly 12 digits.")], widget=forms.TextInput(attrs={"placeholder": "XXXX XXXX XXXX"}))
     emg_contact = forms.CharField(label="Contact Phone", max_length=10, validators=[RegexValidator(regex=r"^\d{10}$", message="Phone number must contain exactly 10 digits.")], widget=forms.TextInput(attrs={"placeholder": "e.g. 9999999999"}))
     move_in_date = forms.DateField(label="Move-In Date", initial=date.today, widget=forms.DateInput(attrs={"type": "date"}))
@@ -176,7 +176,7 @@ class AddressForm(forms.ModelForm):
 class RoomForm(forms.ModelForm):
     sharing_type = forms.ChoiceField(label="Sharing Type", choices=[("single","Single"),("double","Double"),("triple","Triple"), ("quadruple","Quadruple")])
     rent = forms.ChoiceField(label="Rent", choices=[("8000","₹8000"), ("9000","₹9000"), ("12000", "₹12000"), ("12500","₹12500")])
-    floor = forms.ChoiceField(label="Floor", choices=[("first", "First"), ("second","Second"), ("third","Third"), ("forth", "Forth"), ("fifth", "Fifth"), ("sixth", "Sixth"), ("seven","Seven")])
+    floor = forms.ChoiceField(label="Floor",choices=[(1, "Floor 1"), (2, "Floor 2"), (3, "Floor 3"), (4, "Floor 4"), (5, "Floor 5"), (6, "Floor 6"), (7, "Floor 7"),(8, "Floor 8"),(9, "Floor 9"),(10, "Floor 10")])
     class Meta:
         model = Room
 

@@ -1,0 +1,25 @@
+
+<div class="room-card">
+    
+    <div class="room-no-status card-details">
+        <span class="room-no">{{ r_info.number }}</span>
+        <span class="status">Occupied</span>
+    </div>
+    <div class="type card-details">
+        <span class="room-type-txt">Type</span>
+        <span class="rent-type">{{ r_info.sharing_type | title }}</span>
+    </div>
+    <div class="rent card-details">
+        <span class="room-rent-txt">Rent</span>
+        <span class="room-rent">₹{{ r_info.rent }}</span>
+    </div>
+
+    {% with greater_count=r_info.tenant_set.all.count %}
+        {% for t_info in r_info.tenant_set.all %}
+            <div class="tenant-name card-details">
+                <span class="name-txt">Tenant {% if greater_count > 1 %} {{ forloop.counter }} {% endif %}</span>
+                <span class="name">{{ t_info.firstname }} {{ t_info.lastname }}</span>
+            </div>
+        {% endfor %}
+    {% endwith %}
+</div>

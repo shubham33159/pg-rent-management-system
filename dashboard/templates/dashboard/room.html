@@ -23,25 +23,16 @@ Rooms
         </div>
     </header>
 
+    <div class="room-container">
+        {% for floor, rooms in grouped_rooms %}
+            <div class=floor>FLOOR {{ floor }}</div>
+            <div class="room">
+                {% for r_info in rooms %}
+                    {% include "dashboard/includes/add-rooms.html" %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 </main>
-
-<h1>Room</h1>
-
-{% for t_info in tenant %}
-    {{ t_info.firstname }}
-    {{ t_info.lastname }}
-{% endfor %}
-
-
-{% for r_info in room %}
-    {{ r_info.number }}
-    {{ r_info.sharing_type }}
-    {{ r_info.rent }}
-    {{ r_info.floor }}
-{% endfor %}
-
-<br>
-hI
-{{ room.0.tenant_set.all.0.lastname}}
 
 {% endblock content %}

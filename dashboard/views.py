@@ -3,9 +3,13 @@ from dashboard.forms import TenantForm, AddressForm, RoomForm
 from dashboard.models import Tenant, Address, Room
 # Create your views here.
 
+from itertools import groupby
+from collections.abc import Iterable, Iterator
+
 def dashboard(request):
     return render(request, "dashboard/dashboard.html")
 
+# without form
 # def registration(request):
 #     if request.method == "POST":
 #         tenant_form = TenantForm(request.POST)
@@ -63,6 +67,7 @@ def dashboard(request):
 #     })
 
 
+## with form
 def registration(request):
     if request.method == "POST":
         tenant_form = TenantForm(request.POST)
@@ -98,11 +103,12 @@ def tenant(request):
     })
 
 def room(request):
-    tenant = Tenant.objects.all()
-    room = Room.objects.all()
+    rooms = Room.objects.all().order_by("floor", "number")
+    grouped_rooms = ((floor, list(room)) for floor, room in groupby(rooms, key = lambda room: room.floor))
+
+
     return render(request, "dashboard/room.html", {
-        "tenant": tenant,
-        "room": room
+        "grouped_rooms": grouped_rooms,
     })
 
 
