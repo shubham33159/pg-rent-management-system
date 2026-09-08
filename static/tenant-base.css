@@ -1,0 +1,102 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-family: "Outfit", sans-serif;
+    font-size: 62.5%;
+}
+
+/* ###### Element styling ###### */
+li{
+    list-style: none;
+}
+
+
+/* ##################### utility classes ################### */
+.text-yellow{
+    color: #f19c0d;
+}
+
+.text-white{
+    color: #dbe5ed;
+}
+
+.bg-lightblack{
+    background: #151a26;
+}
+
+.text-gray{
+    color: #657190;
+}
+
+/* ##### sidebar styling ########### */
+
+.layout{
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 25rem;
+    background: #151a26;
+    z-index: 1000;
+}
+
+.sidebar .title h3{
+    color: #dbe5ed;
+    border-bottom: 1px solid #4e53544f;
+    padding: 1.6rem;
+    font-family: "Roboto Slab", serif;
+    font-size: 2rem;
+}
+
+.sidebar .navbar{
+    font-family: "Outfit", sans-serif;
+    font-size: 1.3rem;
+    margin: 1rem;
+}
+
+.sidebar .navbar li a{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 0.5rem auto;
+    color: #657190;
+}
+
+.sidebar .navbar li i {
+    width: 2rem;
+    text-align: center;
+}
+
+.sidebar .navbar a:hover{
+    background: #292d3676;
+}
+
+.sidebar .navbar a.active{
+    color: #f19c0d;
+    background: #f59e0b1f;
+    font-weight: 700;
+}
+
+.layout .main-content{
+    background: #0d1117;
+    width: 100%;
+    margin-left: 25rem;
+    min-height: 100vh;
+}
+
+
+span.required{
+    color: #ffff009c;
+}

@@ -1,0 +1,14 @@
+ <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
+    <div class="label-field">
+    <label for="{{ tenant_field.id_for_label }}">
+        {{ tenant_field.label | upper }}
+        {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
+    </label>
+    </div>
+    <div class="input-field">
+        {{ tenant_field }}
+    </div>
+    <div class="error-field">
+        {{ tenant_field.errors }}
+    </div>
+</div>

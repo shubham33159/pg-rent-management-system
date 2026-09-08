@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 import uuid
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Room(models.Model):    
@@ -41,7 +41,7 @@ class Address(models.Model):
 class Tenant(models.Model):
 
     CHOICE_GENDER = (("","Select Gender"), ("male","Male"), ("female","Female"), ("others","Others"))
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=100, null=False, blank=False)
     lastname = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=10, null=False, blank=False)
@@ -58,6 +58,7 @@ class Tenant(models.Model):
     adv_rent = models.DecimalField(max_digits=10, decimal_places=2)
     notes = models.TextField(max_length=1000, blank=True)
     slug = models.SlugField(unique=True, default=uuid.uuid4, editable=False)
+
 
 
     def __str__(self):

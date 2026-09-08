@@ -27,117 +27,62 @@ Tenant Registration
         {% csrf_token %}
 
         <section class="form-control bg-lightblack text-gray">
-            <h1><span class="section-number">01 </span>Personal Details</h1>
+            <h1><span class="section-number">01 </span>Tenant Login Credentials</h1>
+            <hr>
+            <div class="flex-wrapper">
+                {% for tenant_field in tenant_login_credientials %}
+                   {% include "dashboard/includes/form-field.html" %}
+                {% endfor %}
+            <div>
+        </section>
+
+        <section class="form-control bg-lightblack text-gray">
+            <h1><span class="section-number">02 </span>Personal Details</h1>
             <hr>
             <div class="flex-wrapper">
                 {% for tenant_field in personal_details_form %}
-                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
-                        <div class="label-field">
-                        <label for="{{ tenant_field.id_for_label }}">
-                            {{ tenant_field.label | upper }}
-                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
-                        </div>
-                        <div class="input-field">
-                            {{ tenant_field }}
-                        </div>
-                        <div class="error-field">
-                            {{ tenant_field.errors }}
-                        </div>
-                    </div>
+                   {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
         </section>
 
         <section class="form-control bg-lightblack text-gray">
-            <h1><span class="section-number">02 </span>Emergency Contact</h1>
+            <h1><span class="section-number">03 </span>Emergency Contact</h1>
             <hr>
             <div class="flex-wrapper">
                 {% for tenant_field in emergency_contact_form %}
-                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
-                        <div class="label-field">
-                        <label for="{{ tenant_field.id_for_label }}">
-                            {{ tenant_field.label | upper }}
-                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
-                        </div>
-                        <div class="input-field">
-                            {{ tenant_field }}
-                        </div>
-                        <div class="error-field">
-                            {{ tenant_field.errors }}
-                        </div>
-                    </div>
+                   {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
         </section>
 
         <section class="form-control bg-lightblack text-gray">
-            <h1><span class="section-number">03 </span>Address</h1>
+            <h1><span class="section-number">04 </span>Address</h1>
             <hr>
             <div class="flex-wrapper">
                 {% for tenant_field in address_form %}
-                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
-                        <div class="label-field">
-                        <label for="{{ tenant_field.id_for_label }}">
-                            {{ tenant_field.label | upper }}
-                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
-                        </div>
-                        <div class="input-field">
-                            {{ tenant_field }}
-                        </div>
-                        <div class="error-field">
-                            {{ tenant_field.errors }}
-                        </div>
-                    </div>
+                   {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
         </section>
 
         <section class="form-control bg-lightblack text-gray">
-            <h1><span class="section-number">04 </span> Room & Financials</h1>
+            <h1><span class="section-number">05 </span> Room & Financials</h1>
             <hr>
             <div class="flex-wrapper">
                 {% for tenant_field in room_finance_form %}
-                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
-                        <div class="label-field">
-                        <label for="{{ tenant_field.id_for_label }}">
-                            {{ tenant_field.label | upper }}
-                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
-                        </div>
-                        <div class="input-field">
-                            {{ tenant_field }}
-                        </div>
-                        <div class="error-field">
-                            {{ tenant_field.errors }}
-                        </div>
-                    </div>
+                   {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
         </section>
 
 
         <section class="form-control bg-lightblack text-gray">
-            <h1><span class="section-number">05 </span> Additional Notes</h1>
+            <h1><span class="section-number">06 </span> Additional Notes</h1>
             <hr>
             <div class="flex-wrapper">
                 {% for tenant_field in additional_notes_form %}
-                    <div class="form-field {% if tenant_field.errors %}errors{% endif %}">   
-                        <div class="label-field">
-                        <label for="{{ tenant_field.id_for_label }}">
-                            {{ tenant_field.label | upper }}
-                            {% if tenant_field.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
-                        </div>
-                        <div class="input-field">
-                            {{ tenant_field }}
-                        </div>
-                        <div class="error-field">
-                            {{ tenant_field.errors }}
-                        </div>
-                    </div>
+                   {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
         </section>

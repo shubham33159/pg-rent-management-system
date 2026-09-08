@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PGManager{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "tenant-base.css" %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/0a12b55523.js" crossorigin="anonymous"></script>
+    {% block css_file %}
+        <link rel="stylesheet" href="{% static "base.css" %}">
+    {% endblock css_file %}
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar bg-lightblack">
+            <div class="title">
+                <h3>PG<span class="text-yellow">Manager<i class="fa-solid fa-user-tie"></i></span></h3>
+            </div>
+            <nav class="navbar">
+                <li><a href="{% url "dashboard" %}" class="{% if request.resolver_match.url_name == 'agent-dashboard' %}active{% endif %}"><i class="fa-solid fa-chart-bar"></i>Dashboard</a></li>
+                <li><a href="{% url "payment" %}" class="{% if request.resolver_match.url_name == 'payment' %}active{% endif %}"><i class="fa-solid fa-indian-rupee-sign"></i>Payments</a></li>
+                <li><a href="{% url "complaint-registration" %}" class="{% if request.resolver_match.url_name == 'complaint-registration' %}active{% endif %}"><i class="fa-solid fa-toolbox"></i>Maintenance</a></li>
+            </nav>
+        </aside>
+        <div class="main-content">
+            {% block content %}
+            {% endblock content %}    
+        </div>
+    </div>
+    
+</body>
+</html>
