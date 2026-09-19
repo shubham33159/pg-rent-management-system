@@ -1,0 +1,97 @@
+{% extends "tenant-base.html" %}
+{% load static %}
+{% load tz %}
+{% load humanize %}
+
+{% block title %}
+Pay Rent
+{% endblock title %}
+
+{% block css_file %}
+    <link rel="stylesheet" href="{% static 'dashboard/tenant-payment.css' %}" >
+{% endblock css_file %}
+
+
+
+{% block content %}
+
+    <header class="page-header">
+        <div class="header-title header-box">
+            <h2>Pay Rent</h2>
+        </div>
+        <div class="header-date header-box">
+            <span>{% now "M Y" %}</span>
+            <span class="status-dot"></span>
+        </div>
+    </header>
+
+    <main>
+
+        {% if rent_status == "paid" %}
+            <div class="rent-status rent-status-paid">
+                ✓  Your rent for this month is up to date.
+            </div>
+
+        {% elif rent_status == "pending" %}
+            <div class="rent-status rent-status-pending">
+                X  Your rent is not paid.
+            </div>
+
+        {% else %}
+            <div class="rent-status rent-status-overdue">
+                ⚠  Your rent is overdue.
+            </div>
+        {% endif %}
+
+
+        <div class="rent-card">
+            <p class="rent-date">AMOUNT DUE - {% now "F Y" %}</p>
+            
+            <div class="amount-status-container">
+
+                <div class="rent-amount">₹{{ room_rent | intcomma }}</div>
+
+                {% if rent_status == "paid" %}
+                    <div class="tab-rent-status status-paid">{{ rent_status }}</div>
+                
+                {% elif rent_status == "pending" %}
+                    <div class="tab-rent-status status-pending">{{ rent_status }}</div>
+                    
+                {% elif rent_status == "overdue" %}
+                    <div class="tab-rent-status status-overdue">{{ rent_status }}</div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="room-number">Room {{ room_number }} · Due by 7th {% now "M" %}</div>
+        </div>
+
+
+<p class="note"><span class="word-note"> Note: </span>If you pay after the 7th of the month, an additional late fee of <span style="font-weight: bold;">₹500</span> will be charged.</p>
+
+
+
+
+        {% comment %} if {{ rent_status }} == "paid"
+        {{ rent_status }}
+        {{ room_rent }} {% endcomment %}
+
+        {% if rent_status == "pending" or rent_status == "overdue" %}
+            <button id="pay-button">
+                Pay Rent — ₹{{ room_rent | intcomma }}
+            </button>
+        {% endif %}
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+        <script>
+            const razorpayKeyId = "{{ razorpay_key_id }}";
+            const csrfToken = "{{ csrf_token }}";
+        </script>
+
+        <script src="{% static 'dashboard/js/payment.js' %}">
+        </script>
+    </main>
+
+{% endblock content %}

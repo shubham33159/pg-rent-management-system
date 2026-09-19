@@ -1,0 +1,78 @@
+{% extends "tenant-base.html" %}
+{% load static %}
+
+{% block css_file %}
+    <link rel="stylesheet", href="{% static "dashboard/tenant-maintenance.css" %}">
+{% endblock css_file %}
+
+
+
+{% block content %}
+
+    <main>
+        <header class="page-header">
+            <div class="header-title header-box">
+                <h2>Maintenence</h2>
+            </div>
+            <div class="header-date header-box">
+                <span>{% now "M Y" %}</span>
+                <span class="status-dot"></span>
+            </div>
+        </header>
+
+        <form action="{% url "tenant-maintenance" %}" method="POST" novalidate>
+            {% csrf_token %}
+
+            <section class="form-control bg-lightblack text-gray">
+                <h1>Raise a Request</h1>
+                <hr>
+                <div class="flex-wrapper">
+                    {% for form_field in maintenance_form %}
+                        {% include "dashboard/includes/form-field.html" %}
+                    {% endfor %}
+                </div>
+                
+                <button type="submit">Submit Request</button>
+            </section>
+        </form>
+
+
+        <section class="my-complaint-detail bg-lightblack text-gray">
+            <div class="my-complaint">
+                <h1 class="my-complaint-title">My Request</h1>
+                <div class="my-complaint-count">{{ maintenance.count }} TOTAL</div>
+            </div>
+            <hr>
+            {% for complaint_data in maintenance %}
+                <div class="flex-complaiant-content">
+                    <div class="my-complaint-content">
+                        <span class="my-complaint-content-category">
+                            {{ complaint_data.category | upper }}
+                        </span>
+                        <span class="my-complaint-content-priority priority-{{ complaint_data.priority}} ">
+                            {{ complaint_data.priority | upper}}
+                        </span>
+                        <div class="my-complaint-content-issue">
+                            {{ complaint_data.issue | upper }}                        
+                        </div>
+                        <div class="my-complaint-content-date">
+                            Reported {{ complaint_data.date | upper }}
+                        </div>
+                        
+                    </div>
+
+                    <div class="my-complaint-status status-{{ complaint_data.complaint_status }}">
+                        {{ complaint_data.complaint_status | upper }}
+                    </div>
+                </div>
+            <hr>
+            {% endfor %}
+
+
+
+        </section>
+    </main>
+
+{% endblock content %}
+
+

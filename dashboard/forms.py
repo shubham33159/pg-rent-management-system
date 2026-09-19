@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tenant, Address, Room
+from .models import Tenant, Address, Room, Maintenance
 from django.core.validators import RegexValidator
 from datetime import date
 
@@ -61,7 +61,7 @@ class TenantForm(forms.ModelForm):
 
     class Meta:
         model = Tenant
-        exclude = ["slug","address", "status", "user"]
+        exclude = ["slug","address", "status", "user", "rent_status"]
 
         widgets = {
             # "firstname": forms.TextInput(attrs={"placeholder": "Enter first name"}),
@@ -190,7 +190,7 @@ class AddressForm(forms.ModelForm):
 
 class RoomForm(forms.ModelForm):
     # sharing_type = forms.ChoiceField(label="Sharing Type", choices=[("single","Single"),("double","Double"),("triple","Triple"), ("quadruple","Quadruple")])
-    rent = forms.ChoiceField(label="Rent", choices=[("8000","₹8000"), ("9000","₹9000"), ("12000", "₹12000"), ("12500","₹12500")])
+    rent = forms.ChoiceField(label="Rent", choices=[(8000,"₹8000"), (9000,"₹9000"), (12000, "₹12000"), (12500,"₹12500")])
     floor = forms.ChoiceField(label="Floor",choices=[(1, "Floor 1"), (2, "Floor 2"), (3, "Floor 3"), (4, "Floor 4"), (5, "Floor 5"), (6, "Floor 6"), (7, "Floor 7"),(8, "Floor 8"),(9, "Floor 9"),(10, "Floor 10")])
     class Meta:
         model = Room
@@ -216,5 +216,25 @@ class RoomForm(forms.ModelForm):
             },
             "floor": {
                 "floor": "Floor is required."
+            }
+        }
+
+class MaintenanceForm(forms.ModelForm):
+    # complaint_status = forms.ChoiceField(label="COMPLAINT STATUS", choices=(('open', "Open"), ("resolved","Resolved")))
+    class Meta:
+        model = Maintenance
+        fields = ["category", "priority", "issue"]
+
+        labels = {
+            "issue": "describe the issue",
+        }
+
+        widgets = {
+            "issue": forms.Textarea(attrs={'style': 'height:8rem; resize:none;'}), 
+        }
+
+        error_messages = {
+            "issue": {
+                "required": "Provide the issue decription in detail"
             }
         }

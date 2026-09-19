@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from dashboard.forms import TenantForm, AddressForm, RoomForm
-from dashboard.models import Tenant, Address, Room
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from dashboard.forms import TenantForm, AddressForm, RoomForm, MaintenanceForm
+from dashboard.models import Tenant, Address, Room, Payment, Maintenance
+import json
 # Create your views here.
 
 from itertools import groupby
@@ -8,6 +11,13 @@ from collections.abc import Iterable, Iterator
 
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
+
+import razorpay
+from django.conf import settings
+from django.http import JsonResponse
+
+from django.utils import timezone
+import zoneinfo
 
 def dashboard(request):
     return render(request, "dashboard/dashboard.html")
@@ -86,8 +96,7 @@ def login_views(request):
             if user.is_staff:
                 return redirect("dashboard")
             else:
-                print("I am in agent dashboard")
-                return redirect("agent-dashboard")
+                return redirect("tenant-dashboard")
 
         else:
             return render(request, "dashboard/login.html", {
@@ -117,6 +126,8 @@ def registration(request):
             tenant.address = address
 
             tenant.save()
+
+            return HttpResponseRedirect(reverse("registration"))
 
     else:
         tenant_form = TenantForm()
@@ -161,5 +172,147 @@ def complaint_registration(request):
     return render(request, "dashboard/complaint-registration.html")
 
 
-def agent_dashboard(request):
-    return render(request, "dashboard/agent-dashboard.html")
+def tenant_dashboard(request):
+    return render(request, "dashboard/tenant-dashboard.html")
+
+def tenant_payment(request):
+    tenant = Tenant.objects.get(user=request.user)
+    current_day = timezone.now().date()
+    day1 = timezone.now().date().replace(day=1)
+    day8 = timezone.now().date().replace(day=8)
+    payment = Payment.objects.filter(tenant=tenant, month=day1).first()
+
+    if payment:
+        if payment.status == "paid":
+            rent_status = "paid"
+            room_rent = tenant.room.rent
+        elif (payment.status == "pending" or payment.status == "failed") and current_day < day8:
+            rent_status = "pending"
+            room_rent = tenant.room.rent
+        elif (payment.status == "pending" or payment.status == "failed") and current_day >= day8:
+            rent_status = "overdue"
+            room_rent = tenant.room.rent + 500
+    else:
+        if current_day >= day8:
+            rent_status = "overdue"
+            room_rent = tenant.room.rent + 500
+        else:
+            rent_status = "pending"
+
+    room_number = tenant.room.number
+    
+    return render(request, "dashboard/tenant-payment.html", {
+        "rent_status": rent_status,
+        "room_rent": room_rent,
+        "room_number": room_number,
+        "razorpay_key_id": settings.RAZORPAY_KEY_ID
+    })
+
+def tenant_maintenance(request):
+
+    tenant = Tenant.objects.get(user=request.user)
+
+    if request.method == "POST":
+        maintenance_form = MaintenanceForm(request.POST)
+        if maintenance_form.is_valid():
+            maintenance = maintenance_form.save(commit=False)
+            maintenance.tenant = tenant
+            maintenance.save()
+            return HttpResponseRedirect(reverse("tenant-maintenance"))
+
+    else:
+        maintenance_form = MaintenanceForm()
+        
+    maintenance = Maintenance.objects.filter(tenant=tenant).order_by("-status_update_time")
+
+    return render(request, "dashboard/tenant-maintenance.html", {
+        "maintenance_form" : maintenance_form,
+        "maintenance" : maintenance
+    })
+
+
+
+
+def create_payment_order(request):
+    tenant = Tenant.objects.get(user=request.user)
+    amount = 9000
+    month=timezone.now().date().replace(day=1)
+
+    payment, created = Payment.objects.get_or_create(
+            tenant=tenant, 
+            month=month,
+            defaults={
+                "rent_amount": amount,
+                "advance_used": 0,
+                "penalty": 0,
+                "total_amount": amount,
+                "status": "pending",
+            }
+        )
+
+    if created:
+        client = razorpay.Client(
+            auth=(
+                settings.RAZORPAY_KEY_ID,
+                settings.RAZORPAY_KEY_SECRET
+            )
+        )
+
+        order_data = {
+            "amount" : amount * 100,
+            "currency": "INR",
+            "receipt": f"rent_{tenant.id}_{timezone.now().timestamp()}"
+        }
+    
+        order = client.order.create(data=order_data)
+
+        payment.razorpay_order_id = order["id"]
+        payment.save()
+
+    
+    return JsonResponse({
+        "order_id": payment.razorpay_order_id,
+        "amount": amount,
+        "currency": "INR"
+    })
+
+def verify_payment(request):
+    tenant = Tenant.objects.get(user=request.user)
+
+    data = json.loads(request.body)
+
+    client = razorpay.Client(
+        auth=(
+            settings.RAZORPAY_KEY_ID,
+            settings.RAZORPAY_KEY_SECRET
+        )
+    )
+
+    try:
+        client.utility.verify_payment_signature({
+            "razorpay_order_id": data["razorpay_order_id"],
+            "razorpay_payment_id": data["razorpay_payment_id"],
+            "razorpay_signature": data["razorpay_signature"],
+        })
+
+        payment = Payment.objects.get(
+            tenant=tenant, 
+            razorpay_order_id=data["razorpay_order_id"]
+        )
+
+
+        payment.status = "paid"
+        tenant.rent_status = "paid"
+        payment.razorpay_payment_id = data["razorpay_payment_id"]
+        payment.paid_at = timezone.now()
+        payment.save()
+
+
+        return JsonResponse({
+            "status": "success"
+        })
+    
+    except razorpay.errors.SignatureVerificationError:
+        return JsonResponse({
+            "status": "failed"
+        }, status=400)

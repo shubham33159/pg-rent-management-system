@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 import uuid
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 # Create your models here.
 class Room(models.Model):    
@@ -17,11 +19,11 @@ class Room(models.Model):
     )
 
     SHARING_TYPE_CHOICES = (("single","Single"),("double","Double"),("triple","Triple"), ("quadruple","Quadruple"))
-    ROOM_RENT_CHOICES = (("8000","₹8000"), ("9000","₹9000"), ("12000", "₹12000"), ("12500","₹12500"))
+    ROOM_RENT_CHOICES = ((8000,"₹8000"), (9000,"₹9000"), (12000, "₹12000"), (12500,"₹12500"))
 
     number = models.CharField(max_length=10, null=False, blank=False, unique=True)
     sharing_type = models.CharField(max_length=10, choices=SHARING_TYPE_CHOICES)
-    rent = models.CharField(max_length=100000, choices=ROOM_RENT_CHOICES)
+    rent = models.PositiveIntegerField(choices=ROOM_RENT_CHOICES)
     floor = models.PositiveIntegerField( choices=FLOOR_CHOICES, null=False, blank=False)
 
     def __str__(self):
@@ -41,7 +43,9 @@ class Address(models.Model):
 class Tenant(models.Model):
 
     CHOICE_GENDER = (("","Select Gender"), ("male","Male"), ("female","Female"), ("others","Others"))
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    CHOICE_RENT_STATUS = (("pending", "Pending"), ("paid","Paid"))
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     firstname = models.CharField(max_length=100, null=False, blank=False)
     lastname = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=10, null=False, blank=False)
@@ -54,6 +58,7 @@ class Tenant(models.Model):
     address = models.ForeignKey(Address, on_delete=models.PROTECT, null=False, blank=False)
     room = models.ForeignKey(Room,on_delete=models.PROTECT, null=False, blank=False)
     move_in_date = models.DateField(null=False, blank=False)
+    rent_status = models.CharField(null=False, blank=False, default="pending", choices=CHOICE_RENT_STATUS)
     security_deposit = models.DecimalField(max_digits=10, decimal_places=2)
     adv_rent = models.DecimalField(max_digits=10, decimal_places=2)
     notes = models.TextField(max_length=1000, blank=True)
@@ -64,3 +69,66 @@ class Tenant(models.Model):
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
     
+
+
+class Payment(models.Model):
+    STATUS_CHOICES = (
+        ("pending", "Pending"),
+        ("paid", "Paid"),
+        ("failed", "Failed"),
+    )
+
+    tenant = models.ForeignKey("Tenant", on_delete=models.PROTECT)
+    month = models.DateField()
+    rent_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    advance_used = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    penalty = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="pending")
+    paid_at = models.DateTimeField(null=True, blank=True)
+    razorpay_order_id = models.CharField(max_length=100, null=True, blank=True)
+    razorpay_payment_id = models.CharField(max_length=100, null=True, blank=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields = ["tenant", "month"],
+                name = "unique_tenant_payment_month"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.tenant} - {self.month} - ₹{self.total_amount}"
+
+
+class Maintenance(models.Model):
+    CATEGORY_CHOICES = (
+        ('plumbing', 'Plumbing'),
+        ('wifi', 'Wifi'),
+        ('electrical', 'Electrical'),
+        ('furniture', 'Furniture'),
+        ('other', 'Other')
+    )
+
+    PRIORITY_CHOICES = (
+        ('low','Low'),
+        ('medium','Medium'),
+        ('high','High')
+    )
+
+    COMPLAINT_STATUS_CHOICES = (
+        ('open','Open'),
+        ('inprogress','Inprogress'),
+        ('resolved','Resolved')
+    )
+
+    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+    category = models.CharField(null=False, blank=False, default='plumbing', choices=CATEGORY_CHOICES)
+    priority = models.CharField(null=False, blank=False, default='low',choices=PRIORITY_CHOICES)
+    issue = models.TextField(null=False, blank=False)
+    complaint_status = models.CharField(null=False, blank=False, default='open', choices=COMPLAINT_STATUS_CHOICES)
+    date = models.DateField(default=timezone.localdate)
+    status_update_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.tenant}  {self.tenant.room.number}   {self.issue}  {self.complaint_status}"

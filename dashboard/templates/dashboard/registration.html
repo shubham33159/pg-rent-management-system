@@ -23,14 +23,14 @@ Tenant Registration
         </div>
     </header>
 
-    <form action="" method="POST" novalidate>
+    <form action="{% url "registration" %}" method="POST" novalidate>
         {% csrf_token %}
 
         <section class="form-control bg-lightblack text-gray">
             <h1><span class="section-number">01 </span>Tenant Login Credentials</h1>
             <hr>
             <div class="flex-wrapper">
-                {% for tenant_field in tenant_login_credientials %}
+                {% for form_field in tenant_login_credientials %}
                    {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
@@ -40,7 +40,7 @@ Tenant Registration
             <h1><span class="section-number">02 </span>Personal Details</h1>
             <hr>
             <div class="flex-wrapper">
-                {% for tenant_field in personal_details_form %}
+                {% for form_field in personal_details_form %}
                    {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
@@ -50,7 +50,7 @@ Tenant Registration
             <h1><span class="section-number">03 </span>Emergency Contact</h1>
             <hr>
             <div class="flex-wrapper">
-                {% for tenant_field in emergency_contact_form %}
+                {% for form_field in emergency_contact_form %}
                    {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
@@ -60,7 +60,7 @@ Tenant Registration
             <h1><span class="section-number">04 </span>Address</h1>
             <hr>
             <div class="flex-wrapper">
-                {% for tenant_field in address_form %}
+                {% for form_field in address_form %}
                    {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
@@ -70,7 +70,7 @@ Tenant Registration
             <h1><span class="section-number">05 </span> Room & Financials</h1>
             <hr>
             <div class="flex-wrapper">
-                {% for tenant_field in room_finance_form %}
+                {% for form_field in room_finance_form %}
                    {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>
@@ -81,7 +81,7 @@ Tenant Registration
             <h1><span class="section-number">06 </span> Additional Notes</h1>
             <hr>
             <div class="flex-wrapper">
-                {% for tenant_field in additional_notes_form %}
+                {% for form_field in additional_notes_form %}
                    {% include "dashboard/includes/form-field.html" %}
                 {% endfor %}
             <div>

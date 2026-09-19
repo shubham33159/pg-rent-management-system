@@ -1,0 +1,306 @@
+.page-header{
+    font-family: "Roboto Slab", serif;
+    color: #dbe5ed;
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    border-bottom: 0.5px solid #4e53544f;
+}
+
+.header-title h2{
+    padding: 1.6rem;
+    font-weight: 700;
+    font-size: 2.0rem;
+    margin-left: 2rem;
+}
+
+.header-date{
+    padding: 1.6rem;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.header-date span{
+    display: inline-block;
+    color: #657190;
+    font-size: 1.2rem;
+    word-spacing: 0.5rem;
+
+}
+
+.header-date .status-dot{
+    width: 1rem;
+    height: 1rem;
+    background: green;
+    border-radius: 100%;
+    margin-left: 0.5rem;
+}
+
+
+form{
+    margin-top: 2rem; 
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    width: 80rem;
+    max-width: 80%;
+}
+
+
+.form-control{
+    padding: 2rem;
+    border-radius: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+form .form-control h1{
+    font-family: "Roboto Slab", serif;
+    margin-bottom: 1rem;
+    color: #dbe5ed;
+    font-size: 1.6rem;
+}
+
+form .form-control hr{
+    margin-left: -2rem;
+    margin-right: -2rem;
+    /* margin-bottom: 2rem; */
+    border: 1.3px solid #4e53544f;
+}
+
+
+form .form-control .flex-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+form .form-control .form-field{
+    width: 50%;
+    max-width: 50%;
+    font-size: 1.3rem;
+    word-spacing: 0.3rem;
+}
+
+.flex-wrapper .label-field{
+    display: block;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.flex-wrapper .form-field .input-field input{
+    display: block;
+    border: 1.5px solid #4e53544f;
+    background: #1a2032;
+    margin-bottom: 0.5rem;
+    width: 97%;
+    height: 3rem;
+    color: #dbe5ed;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.flex-wrapper .form-field .input-field select{
+    display: block;
+    border: 1.5px solid #4e53544f;
+    background: #1a2032;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    width: 97%;
+    height: 3rem;
+    color: #abb3ba;
+    border-radius: 0.5rem;
+
+}
+
+
+.flex-wrapper .form-field .input-field textarea{
+    display: block;
+    border: 1.5px solid #4e53544f;
+    background: #1a2032;
+    width: 200%;
+    height: 10rem;
+    color: #dbe5ed;
+    border-radius: 0.5rem;
+}
+
+
+.flex-wrapper .form-field .input-field input:focus{
+    border: 1.5px solid #f19c0d;
+    outline: none;
+    border-radius: 0.5rem;
+}
+
+.flex-wrapper .form-field .error-field{
+    color: #f87171;
+    border-radius: 0.5rem;
+}
+
+.flex-wrapper .form-field select:focus{
+    border: 1.5px solid #f19c0d;
+    outline: none;
+    border-radius: 0.5rem;
+}
+
+.flex-wrapper .form-field textarea{
+    padding: 1rem;
+}
+
+
+.flex-wrapper .form-field textarea:focus{
+    border: 1.5px solid #f19c0d;
+    outline: none;
+    border-radius: 0.5rem;
+}
+
+form button[type=submit]{
+    margin-top: 2rem;
+    background: #f19c0d;
+    font-weight: bold;
+    padding: 1.5rem 2rem;
+    border: none;
+    border-radius: 1rem;
+}
+
+form button[type=submit]:hover{
+    background: #dd8f08;;
+
+}
+
+form button[type=reset]{
+    padding: 1.5rem 2rem;
+    border: 1px solid #4e53544f;
+    border-radius: 1rem;
+    background: #0d1117;
+    color: #657190;
+    margin-left: 1.6rem;
+
+}
+
+form button[type=reset]:hover{
+    color: #dbe5ed;
+
+}
+
+
+
+
+.my-complaint-detail{
+    margin-top: 2rem; 
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    width: 80rem;
+    max-width: 80%;
+    border-radius: 1.5rem;
+    /* padding: 2rem; */
+    padding: 2rem 2rem 0rem 2rem;
+    letter-spacing: 0.5px;
+}
+
+.my-complaint{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.my-complaint-detail hr{
+    margin-left: -2rem;
+    margin-right: -2rem;
+    border: 1.3px solid #4e53544f;
+}
+
+.my-complaint-detail hr:last-of-type{
+    border: none;
+}
+
+
+.my-complaint-detail .my-complaint .my-complaint-title{
+    font-family: "Roboto Slab", serif;
+    color: #dbe5ed;
+    font-size: 1.6rem;
+}
+
+.my-complaint-detail .my-complaint .my-complaint-count{
+    font-size: 1.2rem;
+    font-family: "JetBrains Mono", monospacem, sans-serif;
+    padding: 0.3em 0.8em;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 0.3rem;
+
+}
+
+.my-complaint-detail .flex-complaiant-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my-complaint-content{
+    padding: 2rem 0;
+    font-family: "JetBrains Mono", monospacem, sans-serif;
+}
+
+.my-complaint-content .my-complaint-content-category{
+    font-size: 1.2rem;
+    /* padding: 0.3em 0.5em; */
+    padding: 0.3em 0em 0.3em 0.5em;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 0.3rem;
+}
+
+.my-complaint-content .my-complaint-content-priority{
+    font-size: 1.2rem;
+    padding: 0.3em 0.4em;
+    border-radius: 0.3rem;
+    margin-left: 1rem;
+}
+
+.my-complaint-content .priority-low{
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+.my-complaint-content .priority-medium{
+    color: rgba(227, 229, 67, 0.956);
+    background-color: rgba(63, 239, 63, 0.095);
+}
+
+.my-complaint-content .priority-high{
+    color: rgb(211, 50, 50);
+    background-color: rgba(227, 61, 61, 0.13);
+}
+
+.my-complaint-content .my-complaint-content-issue{
+    color: #dbe5ed;
+    font-family: Outfit, sans-serif;
+    font-size: 1.2rem;
+    margin-top: 1.2rem;
+    font-weight: bold;
+}
+
+
+.my-complaint-content .my-complaint-content-date{
+    font-size: 1.2rem;
+    margin-top: 0.7rem;
+}
+
+.my-complaint-status{
+    font-size: 1.2rem;
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    border-radius: 0.3rem;
+}
+
+.my-complaint-status.status-open{
+    background: rgba(255, 255, 255, 0.06);
+    color: #9ea2ae;
+}
+
+.my-complaint-status.status-inprogress{
+    color: rgb(165, 180, 252);
+    background-color: rgba(71, 71, 159, 0.237);;
+}
+
+
+.my-complaint-status.status-resolved{
+    color: rgb(74, 222, 128);
+    background-color: rgba(34, 197, 94, 0.12);
+}
+
