@@ -35,6 +35,39 @@ document.getElementById("pay-button").addEventListener("click", function() {
 
             const razorpayCheckout = new Razorpay(options);
 
+            razorpayCheckout.on("payment.failed", function(response) {
+
+                console.log("🔥 PAYMENT FAILED EVENT FIRED");
+                console.log(response);
+                console.log(response.error);
+
+            });
+
+
+            // razorpayCheckout.on("payment.failed", function(response){
+            //     console.log("Payment failed", response.error);
+
+            //     fetch("/payment-failed/",{
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //             "X-CSRFToken": csrfToken
+            //         },
+                    
+            //         body: JSON.stringify({
+            //             razorpay_order_id: response.error.metadata.order_id,
+            //             razorpay_payment_id: response.error.metadata.payment_id,
+            //             error_code: response.error.code,
+            //             error_description: response.error.description
+
+            //         })
+            //     })
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         console.log(data)
+            //     });
+            // });
+
             razorpayCheckout.open();
         });
 });

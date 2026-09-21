@@ -23,58 +23,107 @@ Tenant
         </div>
     </header>
 
+
+
+   <form method="GET" action="{% url "tenant" %}" id="search-form">
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Search by name, room, or email..." 
+            value="{{ search_query }}"
+            id="search-input"
+            autofocus
+        >
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const inputField = document.getElementById("search-input");
+        const textLength = inputField.value.length;
+        inputField.setSelectionRange(textLength, textLength);
+    </script>
+
+    <!-- <script>
+        const searchInput = document.getElementById("search-input");
+        const searchForm = document.getElementById("search-form");
+
+        let timeout;
+
+        searchInput.addEventListener("input", function () {
+
+            clearTimeout(timeout);
+            searchForm.submit();
+        }, 300);
+        searchInput.focus();
+        searchInput.setSelectionRange(
+            searchInput.value.length,
+            searchInput.value.length
+        )
+    </script> -->
+
+
+
+
+
     <div class="tenant-table">
-        <div class="tenant-row tenant-header">
+        <div class="tenant-row">
             <div>TENANT</div>
             <div>ROOM</div>
             <div>SINCE</div>
             <div>PHONE</div>
             <div>DEPOSIT</div>
             <div>STATUS</div>
+            <div>RENT STATUS</div>
         </div>
         
-        {% for t_info in tenant_info %}
-            <div class="tenant-row">
+        {% for tenant in tenants %}
+            <div class="tenant-row tenant-table-body">
 
                 <div class="tenant-details">
                     <span class="tenant-name">
-                        {{ t_info.firstname }}
-                        {{ t_info.lastname }}
+                        {{ tenant.firstname }}
+                        {{ tenant.lastname }}
                     </span>
                     
                     <span class="tenant-email">
-                        {{ t_info.email }}
+                        {{ tenant.email }}
                     </span>
                 </div>
 
                 <div class="room-number">
-                    {{ t_info.room.number }}
+                    {{ tenant.room.number }}
                 </div>
                 
                 <div class="move-in-date">
-                    {{ t_info.move_in_date }}
+                    {{ tenant.move_in_date }}
                 </div>
 
                 <div class="phone-number">
-                    {{ t_info.phone_number }}
+                    {{ tenant.phone_number }}
                 </div>
 
                 <div class="deposit">
-                    ₹{{ t_info.security_deposit | intcomma }}
+                    ₹{{ tenant.security_deposit | intcomma }}
                 </div>
 
                 <div> 
-                    {% if t_info.status == "Active" %}
-                        <span class="status active">{{ t_info.status | upper}} </span>
+                    {% if tenant.status == "active" %}
+                        <span class="status active">{{ tenant.status | upper}} </span>
 
-                    {% elif t_info.status == "Overdue" %}
-                        <span class="status overdue">{{ t_info.status | upper}} </span>
+                    {% elif tenant.status == "overdue" %}
+                        <span class="status overdue">{{ tenant.status | upper}} </span>
 
-                    {% elif t_info.status == "Notice" %}
-                        <span class="status notice">{{ t_info.status | upper}} </span>
+                    {% elif tenant.status == "notice" %}
+                        <span class="status notice">{{ tenant.status | upper}} </span>
                     
                     {% endif %}
                 </div>
+
+                <div>
+                    <span class="rent-status rent-status-{{ tenant.rent_status }}">{{ tenant.rent_status | capfirst }}</span>
+                </div>
+
             </div>
         
         {% endfor %}

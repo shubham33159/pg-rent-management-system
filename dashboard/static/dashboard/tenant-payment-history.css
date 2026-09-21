@@ -1,0 +1,160 @@
+.page-header{
+    font-family: "Roboto Slab", serif;
+    color: #dbe5ed;
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    border-bottom: 0.5px solid #4e53544f;
+}
+
+.header-title h2{
+    padding: 1.6rem;
+    font-weight: 700;
+    font-size: 2.0rem;
+    margin-left: 2rem;
+}
+
+.header-date{
+    padding: 1.6rem;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.header-date span{
+    display: inline-block;
+    color: #657190;
+    font-size: 1.2rem;
+    word-spacing: 0.5rem;
+
+}
+
+.header-date .status-dot{
+    width: 1rem;
+    height: 1rem;
+    background: green;
+    border-radius: 100%;
+    margin-left: 0.5rem;
+}
+
+
+main{
+    margin: 3rem;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+}
+
+.payment-card{
+    border: 1px solid #2a3040;
+    border-radius: 1rem;
+    /* margin-top: 3rem; */
+    padding: 2.2rem;
+    color: #657190;
+    background-color: rgb(21, 26, 38);
+
+    font-family: "JetBrains Mono", monospacem, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.total-paid-payment-label, .total-pending-payment-label, .total-overdue-payment-label  {
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.total-paid-payment, .total-pending-payment, .total-overdue-payment{
+    margin-bottom: 1rem;
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    font-family: "Roboto Slab", sans-serif;
+    color: #f19c0d;
+}
+
+
+.transaction-container{
+    background-color: rgb(21, 26, 38);
+    border-radius: 1rem;
+    border: 1px solid #2a3040;
+    margin-top: 3rem;
+    color: #7185ad;
+    padding: 2rem;
+    font-size: 1.3rem;
+}
+
+.transaction-container h1{
+    color: #dbe5ed;
+    font-size: 1.6rem;
+    font-family: "Roboto Slab", serif;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+.transaction-container .grid-row{
+    display: grid;
+    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    column-gap: 2rem;
+    justify-items: start;
+    align-items: center;
+    border-top: 1px solid #2a3040;
+    margin: 0rem -2rem;
+    padding-bottom: 1rem;
+    padding-left: 4rem;
+}
+
+.transaction-container .grid-row.row-label{
+    font-family: "JetBrains Mono", monospacem, sans-serif;
+}
+
+.transaction-container .grid-row .grid-item{
+    /* border: 1px solid white; */
+    padding-top: 1rem;
+}
+
+.transaction-container .grid-row .grid-item.rent-amount-item, 
+.transaction-container .grid-row .grid-item.penalty-item{
+    color: white;
+    font-weight: 300;
+}
+
+
+.transaction-container .grid-row .grid-item.total-amount-item{
+    color: #f19c0d;
+    font-weight: 700;
+}
+
+
+.transaction-container .grid-row .grid-item.status-item{
+    /* font-weight: 600; */
+    margin-top: 1rem;
+    padding: 0em 0.3em;
+    border-radius: 0.3rem;
+    text-transform: uppercase;
+    font-family: "JetBrains Mono", monospacem, sans-serif;
+}
+
+
+.rent-status-paid{
+    color: rgb(115, 205, 115);
+    border: 0.5px solid rgba(0, 128, 0, 0.432);
+    background-color: rgba(48, 185, 48, 0.095);
+}
+
+.rent-status-pending{
+    color: rgba(227, 229, 67, 0.956);
+    border: 0.5px solid rgba(255, 219, 17, 0.544);
+    background-color: rgba(63, 239, 63, 0.095);
+}
+
+
+.rent-status-failed{
+    color: rgb(211, 50, 50);
+    border: 0.5px solid rgba(248, 46, 46, 0.647);
+    background-color: rgba(227, 61, 61, 0.13);
+}

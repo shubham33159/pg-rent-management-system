@@ -26,12 +26,17 @@
                 <h3>PG<span class="text-yellow">Manager<i class="fa-solid fa-user-tie"></i></span></h3>
             </div>
             <nav class="navbar">
-                <li><a href="{% url "dashboard" %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fa-solid fa-chart-bar"></i>Dashboard</a></li>
-                <li><a href="{% url "registration" %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}"><i class="fa-solid fa-person-circle-plus"></i>Register Tenant</a></li>
-                <li><a href="{% url "tenant" %}" class="{% if request.resolver_match.url_name == 'tenant' %}active{% endif %}"><i class="fa-solid fa-users"></i>Tenants</a></li>
-                <li><a href="{% url "room" %}" class="{% if request.resolver_match.url_name == 'room' %}active{% endif %}"><i class="fa-solid fa-hotel"></i>Rooms</a></li>
-                <li><a href="{% url "payment" %}" class="{% if request.resolver_match.url_name == 'payment' %}active{% endif %}"><i class="fa-solid fa-indian-rupee-sign"></i>Payments</a></li>
-                <li><a href="{% url "complaint-registration" %}" class="{% if request.resolver_match.url_name == 'complaint-registration' %}active{% endif %}"><i class="fa-solid fa-toolbox"></i>Maintenance</a></li>
+                <ul>
+                    <li><a href="{% url "dashboard" %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fa-solid fa-chart-bar"></i>Dashboard</a></li>
+                    <li><a href="{% url "registration" %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}"><i class="fa-solid fa-person-circle-plus"></i>Register Tenant</a></li>
+                    <li><a href="{% url "tenant" %}" class="{% if request.resolver_match.url_name == 'tenant' %}active{% endif %}"><i class="fa-solid fa-users"></i>Tenants</a></li>
+                    <li><a href="{% url "room" %}" class="{% if request.resolver_match.url_name == 'room' %}active{% endif %}"><i class="fa-solid fa-hotel"></i>Rooms</a></li>
+                    <li><a href="{% url "payment" %}" class="{% if request.resolver_match.url_name == 'payment' %}active{% endif %}"><i class="fa-solid fa-indian-rupee-sign"></i>Payments</a></li>
+                    <li><a href="{% url "complaint-registration" %}" class="{% if request.resolver_match.url_name == 'complaint-registration' %}active{% endif %}"><i class="fa-solid fa-toolbox"></i>Maintenance</a></li>
+                    <hr class="line">
+                    <li class="logout"><a href="{% url "logout" %}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+                </ul>
+
             </nav>
         </aside>
         <div class="main-content">

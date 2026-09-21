@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import dotenv_values
+from dotenv import load_dotenv
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = dotenv_values(BASE_DIR / ".env")
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -126,5 +130,8 @@ STATICFILES_DIRS = [
 ]
 
 
-RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID")
-RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
+# RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID")
+# RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
+
+RAZORPAY_KEY_ID = env.get("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET = env.get("RAZORPAY_KEY_SECRET")

@@ -43,7 +43,7 @@ class Address(models.Model):
 class Tenant(models.Model):
 
     CHOICE_GENDER = (("","Select Gender"), ("male","Male"), ("female","Female"), ("others","Others"))
-    CHOICE_RENT_STATUS = (("pending", "Pending"), ("paid","Paid"))
+    CHOICE_RENT_STATUS = (("pending", "Pending"), ("overdue", "Overdue"), ("paid","Paid"))
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     firstname = models.CharField(max_length=100, null=False, blank=False)
@@ -52,7 +52,7 @@ class Tenant(models.Model):
     email = models.EmailField(unique=True, null=True, blank=True)
     uid = models.CharField(unique=True, max_length=12, blank=False)
     gender = models.CharField(max_length=10, choices=CHOICE_GENDER)
-    status = models.CharField(max_length=100, null=False, blank=False, default="Active")
+    status = models.CharField(max_length=100, null=False, blank=False, default="active")
     emg_contact_name = models.CharField(max_length=100, null=False, blank=False)
     emg_contact = models.CharField(max_length=10, null=True, blank=True)
     address = models.ForeignKey(Address, on_delete=models.PROTECT, null=False, blank=False)
@@ -63,8 +63,6 @@ class Tenant(models.Model):
     adv_rent = models.DecimalField(max_digits=10, decimal_places=2)
     notes = models.TextField(max_length=1000, blank=True)
     slug = models.SlugField(unique=True, default=uuid.uuid4, editable=False)
-
-
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"

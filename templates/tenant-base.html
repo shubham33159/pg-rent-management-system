@@ -16,7 +16,7 @@
 
     <script src="https://kit.fontawesome.com/0a12b55523.js" crossorigin="anonymous"></script>
     {% block css_file %}
-        <link rel="stylesheet" href="{% static "base.css" %}">
+        <link rel="stylesheet" href="{% static "tenant-base.css" %}">
     {% endblock css_file %}
 </head>
 
@@ -27,9 +27,14 @@
                 <h3>PG<span class="text-yellow">Manager<i class="fa-solid fa-user-tie"></i></span></h3>
             </div>
             <nav class="navbar">
-                <li><a href="{% url "tenant-dashboard" %}" class="{% if request.resolver_match.url_name == 'tenant-dashboard' %}active{% endif %}"><i class="fa-solid fa-chart-bar"></i>Dashboard</a></li>
-                <li><a href="{% url "tenant-payment" %}" class="{% if request.resolver_match.url_name == 'tenant-payment' %}active{% endif %}"><i class="fa-solid fa-indian-rupee-sign"></i>Pay Rent</a></li>
-                <li><a href="{% url "tenant-maintenance" %}" class="{% if request.resolver_match.url_name == 'tenant-maintenance' %}active{% endif %}"><i class="fa-solid fa-toolbox"></i>Maintenance</a></li>
+                <ul>
+                    <li><a href="{% url "tenant-dashboard" %}" class="{% if request.resolver_match.url_name == 'tenant-dashboard' %}active{% endif %}"><i class="fa-solid fa-chart-bar"></i>Dashboard</a></li>
+                    <li><a href="{% url "tenant-payment" %}" class="{% if request.resolver_match.url_name == 'tenant-payment' %}active{% endif %}"><i class="fa-solid fa-indian-rupee-sign"></i>Pay Rent</a></li>
+                    <li><a href="{% url "tenant-maintenance" %}" class="{% if request.resolver_match.url_name == 'tenant-maintenance' %}active{% endif %}"><i class="fa-solid fa-toolbox"></i>Maintenance</a></li>
+                    <li><a href="{% url "tenant-payment-history" %}" class="{% if request.resolver_match.url_name == 'tenant-payment-history' %}active{% endif %}"><i class="fa-solid fa-toolbox"></i>Payment History</a></li>
+                    <hr class="line">
+                    <li class="logout"><a href="{% url "logout" %}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+                </ul>
             </nav>
         </aside>
         <div class="main-content">

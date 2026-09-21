@@ -6,6 +6,7 @@ urlpatterns = [
 
     ## admin UI
     path("login/", views.login_views, name="login"),
+    path("logout/", views.logout_views, name="logout"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("registration/", views.registration, name="registration"),
     path("tenant/", views.tenant, name="tenant"),
@@ -19,7 +20,9 @@ urlpatterns = [
     path("tenant-payment/", views.tenant_payment, name="tenant-payment"),
     path("create-payment-order/", views.create_payment_order, name="create-payment-order"),
     path("verify-payment/", views.verify_payment, name="verify-payment"),
+    path("payment-failed/", views.payment_failed, name="payment-failed"),
     path("tenant-maintenance/", views.tenant_maintenance, name="tenant-maintenance"),
+    path("tenant-payment-history/", views.tenant_payment_history, name="tenant-payment-history")
 
 ]
 

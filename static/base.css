@@ -47,11 +47,14 @@ li{
     width: 25rem;
     background: #151a26;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #8aa9af45;
 }
 
 .sidebar .title h3{
     color: #dbe5ed;
-    border-bottom: 1px solid #4e53544f;
+    border-bottom: 1px solid #8aa9af45;
     padding: 1.6rem;
     font-family: "Roboto Slab", serif;
     font-size: 2rem;
@@ -61,6 +64,33 @@ li{
     font-family: "Outfit", sans-serif;
     font-size: 1.3rem;
     margin: 1rem;
+    flex: 1;
+}
+
+.sidebar .navbar ul{
+    list-style: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .navbar ul .line{
+    margin-top: auto;
+    outline: none;
+    border-style: none;
+    border-bottom: 1px solid #8aa9af45;
+    margin-left: -1rem;
+    margin-right: -1rem; 
+}
+
+.sidebar .navbar ul .logout a{
+    border: 1px solid #8aa9af45;
+}
+
+.sidebar .navbar ul .logout a:hover{
+    color: rgb(220, 99, 99);
+    border: 1px solid rgba(220, 99, 99);
+    background: rgba(243, 40, 40, 0.105);
 }
 
 .sidebar .navbar li a{

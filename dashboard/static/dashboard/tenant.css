@@ -37,7 +37,6 @@
 }
 
 
-
 .tenant-table{
     color: #dbe5ed;
     border: 1px solid #2a3040;
@@ -51,9 +50,8 @@
 
 .tenant-row{
     display: grid;
-    grid-template-columns: 2.2fr 1fr 1.8fr 2fr 1.5fr 1.5fr;
+    grid-template-columns: 2.2fr 1fr 1.5fr 1.5fr 1.3fr 1.5fr 1.5fr;
     border-bottom: 1px solid #2a3040;
-    /* padding: 1rem; */
     align-items: center;
     min-height: 4rem;
     padding: 2.2rem 2.2rem;
@@ -125,5 +123,76 @@
 .status.overdue {
     color: #ff4d6d;
     background: rgba(255, 77, 109, 0.15);
+}
+
+.rent-status{
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.4rem 0.5rem;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+}
+
+.rent-status-paid{
+    color: rgb(115, 205, 115);
+    border: 0.5px solid rgba(0, 128, 0, 0.432);
+    background-color: rgba(48, 185, 48, 0.095);
+}
+
+.rent-status-pending{
+    color: rgba(227, 229, 67, 0.956);
+    border: 0.5px solid rgba(255, 219, 17, 0.544);
+    background-color: rgba(63, 239, 63, 0.095);
+}
+
+
+.rent-status-overdue{
+    color: rgb(211, 50, 50);
+    border: 0.5px solid rgba(248, 46, 46, 0.647);
+    background-color: rgba(227, 61, 61, 0.13);
+}
+
+
+
+
+
+
+form{
+    margin: 3rem;
+}
+
+form input{
+    display: inline-block;
+    border: 1.5px solid #4e53544f;
+    background: #1a2032;
+    margin-bottom: 0.5rem;
+    width: 30%;
+    color: #dbe5ed;
+    padding: 0.4em 0.5em;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+}
+
+form input:focus{
+    border: 1.5px solid #f19c0d;
+    outline: none;
+    border-radius: 0.5rem;
+}
+
+
+form button[type=submit]{
+    background: #f19c0d;
+    font-weight: bold;
+    padding: 0.4em 0.5em;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    margin-left: 1rem;
+}
+
+form button[type=submit]:hover{
+    background: #dd8f08;;
+
 }
 

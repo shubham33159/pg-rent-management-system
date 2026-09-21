@@ -1,0 +1,94 @@
+{% extends "tenant-base.html" %}
+{% load static %}
+{% load humanize %}
+
+
+{% block title %}
+    Tenant Payment History
+{% endblock title %}
+
+{% block css_file %}
+    <link rel="stylesheet" href="{% static "dashboard/tenant-payment-history.css" %}">
+{% endblock css_file %}
+
+
+
+
+{% block content %}
+
+<header class="page-header">
+    <div class="header-title header-box">
+        <h2>Payment History</h2>
+    </div>
+    <div class="header-date header-box">
+        <span>{% now "M Y" %}</span>
+        <span class="status-dot"></span>
+    </div>
+</header>
+
+<main>
+
+    <div class="grid-container">
+        <div class="payment-card totol-paid-card">
+            <div class="total-paid-payment-label">Total Paid</div>
+            <div class="total-paid-payment">₹{{ total_paid_payment | floatformat:0 | intcomma }}</div>
+            <div class="total-paid-payment-count">{{ total_paid_payment_count }} transactions</div>
+        </div>
+
+        <div class="payment-card totol-pending-card">
+            <div class="total-pending-payment-label">Total Pending</div>
+            <div class="total-pending-payment">₹{{ total_pending_payment | floatformat:0 | intcomma }}</div>
+            <div class="total-pending-payment-count">{{ total_pending_payment_count }} count</div>
+        </div>
+
+        <div class="payment-card total-overdue-card">
+            <div class="total-overdue-payment-label">Total Overdue</div>
+            <div class="total-overdue-payment">₹{{ total_overdue_payment | floatformat:0 | intcomma }}</div>
+            <div class="total-overdue-payment-count">{{ total_overdue_payment_count }} count</div>
+        </div>
+    </div>
+
+
+    <div class="transaction-container">
+        <h1>Transaction History</h1>
+
+        <div class="grid-row row-label">
+            <div class="grid-item date-label-item">DATE</div>
+            <div class="grid-item amount-label-item">ROOM RENT</div>
+            <div class="grid-item penalty-label-item">PENALTY</div>
+            <div class="grid-item penalty-label-item">TOTAL AMOUNT</div>
+            <div class="grid-item status-label-item">STATUS</div>
+        </div>
+
+
+        {% for payment in payments %}
+            
+            {% if payment.status != "pending" and payment.razorpay_order_id != None %}
+                <div class="grid-row ">
+                    <div class="grid-item payment-item">
+                        {{ payment.paid_at |date:"Y-m-d g:i A" }}
+                    </div>
+                    <div class="grid-item rent-amount-item">
+                        ₹{{ payment.rent_amount | floatformat:0 | intcomma }}
+                    </div>
+                    <div class="grid-item penalty-item">
+                        ₹{{ payment.penalty | floatformat:0 | intcomma }}
+                    </div>
+                    <div class="grid-item total-amount-item">
+                        ₹{{ payment.total_amount | floatformat:0 | intcomma }}
+                    </div>              
+                    <div class="grid-item status-item rent-status-{{ payment.status }}">
+                        {{ payment.status }}
+                    </div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock content %}
+
+
+
+
