@@ -86,6 +86,7 @@ class Payment(models.Model):
     paid_at = models.DateTimeField(null=True, blank=True)
     razorpay_order_id = models.CharField(max_length=100, null=True, blank=True)
     razorpay_payment_id = models.CharField(max_length=100, null=True, blank=True)
+    status_update_time = models.DateTimeField(default=timezone.now)
 
     class Meta:
         constraints = [

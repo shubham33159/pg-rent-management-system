@@ -65,8 +65,8 @@
             
             {% if payment.status != "pending" and payment.razorpay_order_id != None %}
                 <div class="grid-row ">
-                    <div class="grid-item payment-item">
-                        {{ payment.paid_at |date:"Y-m-d g:i A" }}
+                    <div class="grid-item date-item">
+                        {{ payment.status_update_time |date:"Y-m-d g:i A" }}
                     </div>
                     <div class="grid-item rent-amount-item">
                         ₹{{ payment.rent_amount | floatformat:0 | intcomma }}

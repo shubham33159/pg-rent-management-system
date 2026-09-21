@@ -293,7 +293,10 @@ def verify_payment(request):
         payment.save()
         tenant.save()
 
-        return HttpResponseRedirect("tenant-payment")
+        # return HttpResponseRedirect("tenant-payment")
+        return JsonResponse({
+            "status": "success"
+        })
     
     except razorpay.errors.SignatureVerificationError:
         print("inside except block")
@@ -303,19 +306,24 @@ def verify_payment(request):
 
 @require_POST
 def payment_failed(request):
+
     tenant = Tenant.objects.get(user=request.user)
 
     data = json.loads(request.body)
+
+    print("FAILED PAYMENT DATA:", data)
+
     order_id = data.get("razorpay_order_id")
-    payment_id = data.get("razorpay_payment_id")
+
     payment = Payment.objects.get(
         tenant=tenant,
         razorpay_order_id=order_id
     )
 
-    payment.status='failed'
-    payment.razorpay_payment_id = payment_id
+    payment.status = "failed"
     payment.save()
+
+    print("PAYMENT STATUS:", payment.status)
 
     return JsonResponse({
         "status": "failed"
